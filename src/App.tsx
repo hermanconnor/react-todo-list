@@ -1,10 +1,13 @@
+import AddTodoForm from "./components/AddTodoForm";
+
 function App() {
   return (
-    <>
-      <h1 className='text-3xl text-indigo-600 font-bold underline'>
-        Hello world!
-      </h1>
-    </>
+    <main>
+      <div className="container mx-auto px-5">
+        <h1 className="text-center">Todo List</h1>
+        <AddTodoForm />
+      </div>
+    </main>
   );
 }
 
