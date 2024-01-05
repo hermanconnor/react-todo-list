@@ -1,7 +1,15 @@
-import { FormEvent } from "react";
+import { useEffect, useRef, FormEvent } from "react";
 import { toast } from "sonner";
 
 const AddTodoForm = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -25,6 +33,7 @@ const AddTodoForm = () => {
           Add a Todo
         </label>
         <input
+          ref={inputRef}
           type="text"
           id="todoInput"
           name="todo"
