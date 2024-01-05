@@ -1,6 +1,25 @@
+import { FormEvent } from "react";
+import { toast } from "sonner";
+
 const AddTodoForm = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const todo = formData.get("todo");
+
+    if (!todo) {
+      toast.error("Please enter a todo");
+      return;
+    }
+
+    console.log(todo);
+
+    e.currentTarget.reset();
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="m-auto flex w-full max-w-lg items-center gap-2 p-6">
         <label htmlFor="todoInput" className="sr-only">
           Add a Todo
@@ -8,6 +27,7 @@ const AddTodoForm = () => {
         <input
           type="text"
           id="todoInput"
+          name="todo"
           placeholder="Enter something to do..."
           className="w-full rounded-xl border-2 border-zinc-600 bg-transparent px-5 py-2 outline-none transition-all duration-150 ease-linear placeholder:text-zinc-500 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/50"
         />
