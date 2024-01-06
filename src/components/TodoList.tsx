@@ -1,7 +1,16 @@
 import { motion } from "framer-motion";
 
+import useTodo from "@/hooks/useTodo";
+
 const TodoList = () => {
-  return <motion.ul></motion.ul>;
+  const { todos } = useTodo();
+  return (
+    <motion.ul>
+      {todos.map((todo) => (
+        <motion.li key={todo.id}>{todo.text}</motion.li>
+      ))}
+    </motion.ul>
+  );
 };
 
 export default TodoList;

@@ -1,8 +1,12 @@
 import { useEffect, useRef, FormEvent } from "react";
 import { toast } from "sonner";
 
+import useTodo from "@/hooks/useTodo";
+
 const AddTodoForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { addTodo } = useTodo();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -21,7 +25,8 @@ const AddTodoForm = () => {
       return;
     }
 
-    console.log(todo);
+    addTodo(todo.toString().trim());
+    toast.success("Todo added successfully!");
 
     e.currentTarget.reset();
   };
