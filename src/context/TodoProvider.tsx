@@ -1,15 +1,19 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 import TodosContextType from "@/types/TodosContextType";
 import Todo from "@/types/Todo";
-import { getFromStorage } from "@/utils";
+// import { getFromStorage } from "@/utils";
 
 interface Props {
   children: ReactNode;
 }
 
-const initial = () => getFromStorage("todos");
+const initial = () => {
+  const localValue = localStorage.getItem("todos");
+
+  return localValue ? JSON.parse(localValue) : [];
+};
 
 export const TodoContext = createContext<TodosContextType | undefined>(
   undefined,
@@ -17,6 +21,10 @@ export const TodoContext = createContext<TodosContextType | undefined>(
 
 const TodoProvider = ({ children }: Props) => {
   const [todos, setTodos] = useState<Todo[]>(initial);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   // ::: ADD NEW TODO :::
   const addTodo = (text: string): void => {
@@ -27,8 +35,6 @@ const TodoProvider = ({ children }: Props) => {
     };
 
     setTodos((prevTodos) => [...prevTodos, newTodo]);
-
-    localStorage.setItem("todos", JSON.stringify(todos));
   };
 
   const value: TodosContextType = {

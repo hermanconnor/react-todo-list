@@ -1,6 +1,7 @@
 import { Toaster } from "sonner";
 
 import AddTodoForm from "./components/AddTodoForm";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <div className="container mx-auto px-5 py-7">
         <h1 className="text-center text-5xl">Todo List</h1>
         <AddTodoForm />
+        <TodoList />
       </div>
     </main>
   );
