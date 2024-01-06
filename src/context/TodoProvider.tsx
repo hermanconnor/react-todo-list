@@ -1,13 +1,27 @@
-import { createContext } from "react";
+import { createContext, ReactNode, useState } from "react";
+
+import TodosContextType from "@/types/TodosContextType";
+import Todo from "@/types/Todo";
+import { getFromStorage } from "@/utils";
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const TodoContext = createContext(undefined);
+const initial = () => getFromStorage("todos");
+
+export const TodoContext = createContext<TodosContextType | undefined>(
+  undefined,
+);
 
 const TodoProvider = ({ children }: Props) => {
-  return <TodoContext.Provider>{children}</TodoContext.Provider>;
+  const [todos, setTodos] = useState<Todo[]>(initial);
+
+  const value: TodosContextType = {
+    todos,
+  };
+
+  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 };
 
 export default TodoProvider;
