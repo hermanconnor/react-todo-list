@@ -1,7 +1,6 @@
 import { Toaster } from "sonner";
 
-import AddTodoForm from "./components/AddTodoForm";
-import TodoList from "./components/TodoList";
+import { AddTodoForm, TodoList } from "./components";
 
 function App() {
   return (

@@ -1,8 +1,7 @@
 import { createContext, ReactNode } from "react";
 import { nanoid } from "nanoid";
 
-import TodosContextType from "@/types/TodosContextType";
-import Todo from "@/types/Todo";
+import { Todo, TodosContextType } from "@/types";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
 interface Props {
