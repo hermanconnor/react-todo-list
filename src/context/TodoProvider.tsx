@@ -1,30 +1,20 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode } from "react";
 import { nanoid } from "nanoid";
 
 import TodosContextType from "@/types/TodosContextType";
 import Todo from "@/types/Todo";
-// import { getFromStorage } from "@/utils";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 interface Props {
   children: ReactNode;
 }
-
-const initial = () => {
-  const localValue = localStorage.getItem("todos");
-
-  return localValue ? JSON.parse(localValue) : [];
-};
 
 export const TodoContext = createContext<TodosContextType | undefined>(
   undefined,
 );
 
 const TodoProvider = ({ children }: Props) => {
-  const [todos, setTodos] = useState<Todo[]>(initial);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  const [todos, setTodos] = useLocalStorage<Todo[]>("todos", []);
 
   // ::: ADD NEW TODO :::
   const addTodo = (text: string): void => {
