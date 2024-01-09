@@ -20,10 +20,17 @@ const TodoProvider = ({ children }: Props) => {
     const newTodo: Todo = {
       id: nanoid(),
       text,
-      status: "undone",
+      status: "incomplete",
     };
 
     setTodos((prevTodos) => [...prevTodos, newTodo]);
+  };
+
+  // EDIT TODO
+  const editTodo = (id: string, text: string) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === id ? { ...todo, text } : todo)),
+    );
   };
 
   // DELETE TODO
@@ -34,6 +41,7 @@ const TodoProvider = ({ children }: Props) => {
   const value: TodosContextType = {
     todos,
     addTodo,
+    editTodo,
     deleteTodo,
   };
 
