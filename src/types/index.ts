@@ -7,4 +7,5 @@ export interface Todo {
 export interface TodosContextType {
   todos: Todo[];
   addTodo: (text: string) => void;
+  deleteTodo: (id: string) => void;
 }
