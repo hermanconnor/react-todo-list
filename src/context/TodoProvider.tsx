@@ -33,6 +33,20 @@ const TodoProvider = ({ children }: Props) => {
     );
   };
 
+  // UPDATE STATUS
+  const updateStatus = (id: string) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id
+          ? {
+              ...todo,
+              status: todo.status === "incomplete" ? "completed" : "incomplete",
+            }
+          : todo,
+      ),
+    );
+  };
+
   // DELETE TODO
   const deleteTodo = (id: string): void => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
@@ -42,6 +56,7 @@ const TodoProvider = ({ children }: Props) => {
     todos,
     addTodo,
     editTodo,
+    updateStatus,
     deleteTodo,
   };
 
