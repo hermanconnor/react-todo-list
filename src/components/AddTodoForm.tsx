@@ -48,7 +48,7 @@ const AddTodoForm = () => {
 
         <button
           type="submit"
-          className="rounded-full bg-indigo-500 px-5 py-2 uppercase leading-normal text-white transition-all duration-150 ease-in-out hover:bg-indigo-600 hover:shadow-md focus:bg-indigo-600 focus:shadow-lg focus:outline-none focus:ring focus:ring-indigo-300 active:bg-indigo-700"
+          className="rounded-full bg-indigo-500 px-5 py-2 uppercase leading-normal text-white transition-all duration-150 ease-in-out hover:bg-indigo-600 hover:shadow-md focus:bg-indigo-600 focus:shadow-lg focus:outline-none focus:ring focus:ring-indigo-300 active:scale-95 active:bg-indigo-700"
         >
           Submit
         </button>
