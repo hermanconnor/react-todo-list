@@ -85,7 +85,13 @@ const TodoItem = ({ todo }: Props) => {
         </motion.div>
       ) : (
         <div className="flex flex-col gap-5 text-white">
-          <motion.span layout className="border-b border-b-white">
+          <motion.span
+            layout
+            className={cn(
+              "border-b border-b-white",
+              todo.status === "completed" && "line-through",
+            )}
+          >
             {todo.text}
           </motion.span>
 
@@ -132,6 +138,7 @@ const TodoItem = ({ todo }: Props) => {
 
             <div className="flex gap-3">
               <button
+                disabled={todo.status === "completed"}
                 className="flex items-center gap-1"
                 onClick={() => handleEdit(todo.id)}
               >
