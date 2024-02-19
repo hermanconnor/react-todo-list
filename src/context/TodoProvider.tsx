@@ -1,8 +1,7 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 import { Todo, TodosContextType } from "@/types";
-import useLocalStorage from "@/hooks/useLocalStorage";
 
 interface Props {
   children: ReactNode;
@@ -13,7 +12,16 @@ export const TodoContext = createContext<TodosContextType | undefined>(
 );
 
 const TodoProvider = ({ children }: Props) => {
-  const [todos, setTodos] = useLocalStorage<Todo[]>("todos", []);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const savedTodos: Todo[] = JSON.parse(
+      localStorage.getItem("todos") ?? "[]",
+    );
+    return savedTodos;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   // ADD NEW TODO
   const addTodo = (text: string): void => {
@@ -52,12 +60,20 @@ const TodoProvider = ({ children }: Props) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
+  // DELETE ALL COMPLETED
+  const deleteAllCompleted = () => {
+    setTodos((prevTodos) =>
+      prevTodos.filter((todo) => todo.status === "incomplete"),
+    );
+  };
+
   const value: TodosContextType = {
     todos,
     addTodo,
     editTodo,
     updateStatus,
     deleteTodo,
+    deleteAllCompleted,
   };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;

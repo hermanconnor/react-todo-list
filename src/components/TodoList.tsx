@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 
-import { TodoItem, NothingToDo } from "@/components";
-
+import TodoItem from "./TodoItem";
+import NothingToDo from "./NothingToDo";
 import useTodo from "@/hooks/useTodo";
 
 const TodoList = () => {
   const { todos } = useTodo();
 
-  if (!todos.length) {
+  if (todos.length === 0) {
     return (
       <div className="m-auto max-w-lg px-5">
         <div className="flex flex-col items-center gap-5 rounded-xl px-5 py-10 text-center text-xl font-bold">

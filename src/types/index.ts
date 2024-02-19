@@ -10,4 +10,5 @@ export interface TodosContextType {
   editTodo: (id: string, text: string) => void;
   updateStatus: (id: string) => void;
   deleteTodo: (id: string) => void;
+  deleteAllCompleted: () => void;
 }
